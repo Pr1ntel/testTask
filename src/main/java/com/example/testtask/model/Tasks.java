@@ -23,17 +23,28 @@ public class Tasks {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status_type_id")
-    private int statusTypeId;
+    @ManyToOne
+    @JoinColumn(name = "status_type_id")
+    private StatusType statusTypeId;
 
-    @Column(name = "priority_type_id")
-    private int priorityTypeId;
+    @ManyToOne
+    @JoinColumn(name = "priority_type_id")
+    private PriorityType priorityTypeId;
 
-    @Column(name = "author_id")
-    private int authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Users authorId;
 
-    @Column(name = "executor_id")
-    private int executorId;
+    @ManyToOne
+    @JoinColumn(name = "executor_id")
+    private Users executorId;
+
+
+    //TODO Проверить
+    /*@Column(name = "comment")
+    private String comment;
+
+    @*/
 
 
 }

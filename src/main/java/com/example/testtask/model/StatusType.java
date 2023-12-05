@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "status_type")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
