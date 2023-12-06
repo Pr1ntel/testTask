@@ -17,4 +17,5 @@ public class TasksRequestDto {
     private int priorityTypeId;
     private int authorId;
     private int executorId;
+    private String comment;
 }
