@@ -1,5 +1,6 @@
 package com.example.testtask.config;
 
+import com.example.testtask.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

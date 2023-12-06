@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PriorityTypeRepository extends JpaRepository<PriorityType, Integer> {
-    
+
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthRequestDto {
     @NotNull @Min(5) @Max(64)
-    private String email;
+    private String username;
     @NotNull @Min(5) @Max(70)
     private String password;
 }
