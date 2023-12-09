@@ -39,9 +39,4 @@ public class Tasks {
     @JoinColumn(name = "executor_id")
     private Users executorId;
 
-
-
-
-
-
 }

@@ -1,5 +1,7 @@
 package com.example.testtask.controllers;
 
+import com.example.testtask.dto.CommentsRequestDto;
+import com.example.testtask.dto.CommentsResponseDto;
 import com.example.testtask.dto.TasksRequestDto;
 import com.example.testtask.dto.TasksResponseDto;
 import com.example.testtask.service.TasksService;
@@ -20,8 +22,19 @@ public class CrudController {
         return tasksService.getAll();
     }
 
+    @GetMapping(value = "/get-all-comments")
+    public List<CommentsResponseDto> getAllComments(){
+        return tasksService.getAllComments();
+    }
+
     @PostMapping(value = "/new-task")
     public void addNewTask(@RequestBody TasksRequestDto tasksRequestDto){
         tasksService.addNewTask(tasksRequestDto);
     }
+
+    @PostMapping(value = "/new-comment")
+    public void addNewComment(@RequestBody CommentsRequestDto commentsRequestDto){
+        tasksService.addNewComment(commentsRequestDto);
+    }
+
 }

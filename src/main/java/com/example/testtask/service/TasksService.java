@@ -1,5 +1,7 @@
 package com.example.testtask.service;
 
+import com.example.testtask.dto.CommentsRequestDto;
+import com.example.testtask.dto.CommentsResponseDto;
 import com.example.testtask.dto.TasksRequestDto;
 import com.example.testtask.dto.TasksResponseDto;
 import com.example.testtask.model.*;
@@ -76,7 +78,24 @@ public class TasksService {
                     .executorId(findExecutorId)
                     .build();
 
-            logger.error("ошибка тут"+ failedFilmsItem );
+            logger.error("ошибка тут" + failedFilmsItem);
         }
     }
+    public void addNewComment(CommentsRequestDto commentsRequestDto) {
+        Comments insertNewComment = Comments.builder()
+                .taskId(commentsRequestDto.getTaskId())
+                .description(commentsRequestDto.getDescription())
+                .build();
+        commentsRepository.save(insertNewComment);
+    }
+
+    public List<CommentsResponseDto> getAllComments() {
+        return commentsRepository.findAll().stream().map(
+                comments -> CommentsResponseDto.builder()
+                        .taskId(comments.getTaskId())
+                        .description(comments.getDescription())
+                        .build()
+        ).collect(Collectors.toList());
+    }
+
 }
