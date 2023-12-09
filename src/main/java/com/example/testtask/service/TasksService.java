@@ -6,9 +6,9 @@ import com.example.testtask.model.*;
 import com.example.testtask.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +21,7 @@ public class TasksService {
     private final TasksRepository tasksRepository;
     private final UsersRepository usersRepository;
     private final CommentsRepository commentsRepository;
+    private final Logger logger = LoggerFactory.getLogger(TasksService.class);
 
 
     public List<TasksResponseDto> getAll() {
@@ -33,7 +34,6 @@ public class TasksService {
                         .priorityTypeName(tasks.getPriorityTypeId().getPriorityType())
                         .authorName(tasks.getAuthorId().getUsername())
                         .executorName(tasks.getExecutorId().getUsername())
-                        .commentText(commentsRepository.findByTaskId(tasks.getId()).getDescription())
                         .build()
         ).collect(Collectors.toList());
     }
@@ -47,23 +47,36 @@ public class TasksService {
         getByHeader(tasksRepository.deleteByHeader(header));
     }
 
-    public void addNewTask(TasksRequestDto tasksRequestDto){
+    public void addNewTask(TasksRequestDto tasksRequestDto) {
 
         StatusType findStatusType = statusTypeRepository.findById(tasksRequestDto.getStatusTypeId()).get();
         PriorityType findPriorityType = priorityTypeRepository.findById(tasksRequestDto.getStatusTypeId()).get();
         Users findAuthorId = usersRepository.findById(tasksRequestDto.getAuthorId()).get();
         Users findExecutorId = usersRepository.findById(tasksRequestDto.getExecutorId()).get();
-        Comments findComments = commentsRepository.findById(tasksRequestDto.getComment()).get();
 
-        Tasks insertNewTask = Tasks.builder()
-                .header(tasksRequestDto.getHeader())
-                .description(tasksRequestDto.getDescription())
-                .statusTypeId(findStatusType)
-                .priorityTypeId(findPriorityType)
-                .authorId(findAuthorId)
-                .executorId(findExecutorId)
-                .build();
-        tasksRepository.save(insertNewTask);
+        try {
+            Tasks insertNewTask = Tasks.builder()
+                    .header(tasksRequestDto.getHeader())
+                    .description(tasksRequestDto.getDescription())
+                    .statusTypeId(findStatusType)
+                    .priorityTypeId(findPriorityType)
+                    .authorId(findAuthorId)
+                    .executorId(findExecutorId)
+                    .build();
+            tasksRepository.save(insertNewTask);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            Tasks failedFilmsItem = Tasks.builder()
+                    .header(tasksRequestDto.getHeader())
+                    .description(tasksRequestDto.getDescription())
+                    .statusTypeId(findStatusType)
+                    .priorityTypeId(findPriorityType)
+                    .authorId(findAuthorId)
+                    .executorId(findExecutorId)
+                    .build();
+
+            logger.error("ошибка тут"+ failedFilmsItem );
+        }
     }
 }
