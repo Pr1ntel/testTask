@@ -39,9 +39,7 @@ public class Tasks {
     @JoinColumn(name = "executor_id")
     private Users executorId;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
-    private Comments commentId;
+
 
 
 

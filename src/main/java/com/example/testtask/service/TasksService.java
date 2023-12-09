@@ -33,6 +33,7 @@ public class TasksService {
                         .priorityTypeName(tasks.getPriorityTypeId().getPriorityType())
                         .authorName(tasks.getAuthorId().getUsername())
                         .executorName(tasks.getExecutorId().getUsername())
+                        .commentText(commentsRepository.findByTaskId(tasks.getId()).getDescription())
                         .build()
         ).collect(Collectors.toList());
     }
@@ -61,7 +62,6 @@ public class TasksService {
                 .priorityTypeId(findPriorityType)
                 .authorId(findAuthorId)
                 .executorId(findExecutorId)
-                .commentId(findComments)
                 .build();
         tasksRepository.save(insertNewTask);
 
