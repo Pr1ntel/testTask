@@ -16,5 +16,5 @@ public class TasksResponseDto {
     private String priorityTypeName;
     private String authorName;
     private String executorName;
-    private int comment;
+    private String commentText;
 }

@@ -1,7 +1,6 @@
 package com.example.testtask.dto;
 
 
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +16,5 @@ public class TasksRequestDto {
     private int priorityTypeId;
     private int authorId;
     private int executorId;
-    private String comment;
+    private int comment;
 }
