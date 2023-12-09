@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TasksRepository extends JpaRepository<Tasks, Integer> {
-    String deleteByHeader(String header);
     Tasks getByHeader(String header);
+    Tasks findTasksById(int id);
+
 
 }

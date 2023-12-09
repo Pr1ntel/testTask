@@ -40,14 +40,19 @@ public class TasksService {
         ).collect(Collectors.toList());
     }
 
+    public Tasks getTaskById(int id){
+        return tasksRepository.findTasksById(id);
+    }
 
-    public void getByHeader(String header) {
+
+
+   /* public void getTaskByHeader(String header) {
         tasksRepository.getByHeader(header);
     }
 
-    public void deleteByHeader(String header) {
-        getByHeader(tasksRepository.deleteByHeader(header));
-    }
+    public void deleteTaskByHeader(int id) {
+        getTaskByHeader(tasksRepository.deleteById(id));
+    }*/
 
     public void addNewTask(TasksRequestDto tasksRequestDto) {
 
