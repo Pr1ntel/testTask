@@ -40,6 +40,20 @@ public class TasksService {
         ).collect(Collectors.toList());
     }
 
+    public List<TasksResponseDto> getAllByAuthorId(int id) {
+        return tasksRepository.findAll().stream().map(
+                tasks -> TasksResponseDto.builder()
+                        .id(tasks.getId())
+                        .header(tasks.getHeader())
+                        .description(tasks.getDescription())
+                        .statusTypeName(tasks.getStatusTypeId().getStatusType())
+                        .priorityTypeName(tasks.getPriorityTypeId().getPriorityType())
+                        .authorName(tasks.getAuthorId().getUsername())
+                        .executorName(tasks.getExecutorId().getUsername())
+                        .build()
+        ).collect(Collectors.toList());
+    }
+
     public Tasks getTaskById(int id){
         return tasksRepository.findTasksById(id);
     }

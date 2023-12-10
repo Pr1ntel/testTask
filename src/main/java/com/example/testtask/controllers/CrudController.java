@@ -33,8 +33,10 @@ public class CrudController {
         return tasksService.getTaskById(id);
     }
 
-
-
+    @GetMapping(value = "get-task-by-author-id/{id}")
+    public List<TasksResponseDto> getTaskByAuthorId(@PathVariable int id) {
+        return tasksService.getAllByAuthorId(id);
+    }
     @PostMapping(value = "/new-task")
     public void addNewTask(@RequestBody TasksRequestDto tasksRequestDto) {
         tasksService.addNewTask(tasksRequestDto);
