@@ -1,11 +1,9 @@
 package com.example.testtask.controllers;
 
-import com.example.testtask.dto.CommentsRequestDto;
-import com.example.testtask.dto.CommentsResponseDto;
-import com.example.testtask.dto.TasksRequestDto;
-import com.example.testtask.dto.TasksResponseDto;
+import com.example.testtask.dto.*;
 import com.example.testtask.model.Tasks;
 import com.example.testtask.service.TasksService;
+import com.example.testtask.service.UsersService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +15,15 @@ import java.util.List;
 @RequestMapping("/api/v1/crud")
 public class CrudController {
     private final TasksService tasksService;
+    private final UsersService usersService;
 
     @GetMapping(value = "/get-all")
     public List<TasksResponseDto> getAll() {
         return tasksService.getAll();
     }
+
+    @GetMapping(value = "/get-all/users")
+    public List<UsersResponseDto> getAllUsers(){return usersService.getAll();}
 
     @GetMapping(value = "/get-all-comments")
     public List<CommentsResponseDto> getAllComments() {
@@ -47,5 +49,9 @@ public class CrudController {
         tasksService.addNewComment(commentsRequestDto);
     }
 
+    @DeleteMapping(value = "/delete-task/{id}")
+    public void deleteById(@PathVariable int id) {
+        tasksService.deleteById(id);
+    }
 
 }

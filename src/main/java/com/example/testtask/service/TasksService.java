@@ -62,11 +62,10 @@ public class TasksService {
 
    /* public void getTaskByHeader(String header) {
         tasksRepository.getByHeader(header);
-    }
-
-    public void deleteTaskByHeader(int id) {
-        getTaskByHeader(tasksRepository.deleteById(id));
-    }*/
+   }*/
+   public void deleteById(int id){
+       tasksRepository.deleteTasksById(id);
+   }
 
     public void addNewTask(TasksRequestDto tasksRequestDto) {
 

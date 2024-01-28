@@ -26,6 +26,21 @@ public class Users implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "patronymic_name")
+    private String patronymicName;
+
+    @Column(name = "age")
+    private int age;
+
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Roles roleName;
 
 
 
