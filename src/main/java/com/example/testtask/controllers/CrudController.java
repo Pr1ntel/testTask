@@ -22,7 +22,7 @@ public class CrudController {
         return tasksService.getAll();
     }
 
-    @GetMapping(value = "/get-all/users")
+    @GetMapping(value = "/get-all-users")
     public List<UsersResponseDto> getAllUsers(){return usersService.getAll();}
 
     @GetMapping(value = "/get-all-comments")
